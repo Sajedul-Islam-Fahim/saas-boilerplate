@@ -1,0 +1,15 @@
+# Dependencies
+saas-boilerplate-api/vendor/
+saas-boilerplate-web/node_modules/
+
+# Environment files
+saas-boilerplate-api/.env
+saas-boilerplate-web/.env
+
+# Laravel specific
+saas-boilerplate-api/storage/logs/*
+saas-boilerplate-api/bootstrap/cache/*
+
+# OS
+.DS_Store
+Thumbs.db
