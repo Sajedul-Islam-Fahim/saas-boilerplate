@@ -45,8 +45,8 @@ class User extends Authenticatable
     public function organizations()
     {
         return $this->belongsToMany(Organization::class, 'organization_user')
-                    ->withPivot('role')
-                    ->withTimestamps();
+            ->withPivot('role')
+            ->withTimestamps();
     }
 
     public function ownedOrganizations()
@@ -57,5 +57,19 @@ class User extends Authenticatable
     public function activityLogs()
     {
         return $this->hasMany(ActivityLog::class);
+    }
+    public function assignedTasks()
+    {
+        return $this->hasMany(Task::class, 'assigned_to');
+    }
+
+    public function createdTasks()
+    {
+        return $this->hasMany(Task::class, 'created_by');
+    }
+
+    public function taskComments()
+    {
+        return $this->hasMany(TaskComment::class);
     }
 }

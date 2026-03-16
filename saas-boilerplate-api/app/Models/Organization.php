@@ -43,8 +43,8 @@ class Organization extends Model
     public function members()
     {
         return $this->belongsToMany(User::class, 'organization_user')
-                    ->withPivot('role')
-                    ->withTimestamps();
+            ->withPivot('role')
+            ->withTimestamps();
     }
 
     public function invitations()
@@ -70,5 +70,20 @@ class Organization extends Model
     public function isOnTrial(): bool
     {
         return $this->trial_ends_at && $this->trial_ends_at->isFuture();
+    }
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function hasMember(User $user): bool
+    {
+        return $this->members()->where('user_id', $user->id)->exists();
+    }
+
+    public function getMemberRole(User $user): ?string
+    {
+        $member = $this->members()->where('user_id', $user->id)->first();
+        return $member?->pivot->role;
     }
 }
